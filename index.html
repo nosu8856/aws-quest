@@ -1,0 +1,1145 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0b1022"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><title>AWS QUEST — クラウドの覇者</title><style>
+:root{--bg:#080d1a;--pane:#151d33;--pane2:#202a44;--gold:#e6c27a;--txt:#f3f3ff;--dim:#a9b3cf;--pur:#9c79fa;--green:#57dfba;--red:#ef758f}*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN",Meiryo,sans-serif}body{background:radial-gradient(ellipse at 50% -10%,#323054 0%,#0c1122 43%,#080c19 100%);padding-bottom:calc(94px + env(safe-area-inset-bottom))}button,input{font:inherit}button{cursor:pointer;touch-action:manipulation}button:disabled{opacity:.4}#app{max-width:520px;margin:auto;min-height:100vh}.header{padding:calc(20px + env(safe-area-inset-top)) 18px 10px;display:flex;justify-content:space-between;align-items:center}.logo{font-size:11px;letter-spacing:3px;color:var(--gold)}h1,h2,h3,p{margin:0}h1{font-family:Georgia,serif;font-size:25px;letter-spacing:1px}.muted{color:var(--dim)}.tiny{font-size:11px}.small{font-size:13px}.gold{color:var(--gold)}.bar{height:8px;border-radius:10px;background:#080d1d;overflow:hidden;border:1px solid #394261}.bar>i{display:block;height:100%;border-radius:10px;background:linear-gradient(90deg,#a85fdd,#e8be6c);transition:width .4s}.bar.hp>i{background:linear-gradient(90deg,#af426e,#ec7890)}.wrap{padding:8px 16px 20px}.panel{border:1px solid #394263;border-radius:18px;background:linear-gradient(135deg,#1d2741,#11192d);padding:17px;box-shadow:0 10px 28px #0005;margin-bottom:14px}.panel h2{font-size:19px;margin-bottom:10px}.btn{border:1px solid #9e8255;background:linear-gradient(125deg,#a78041,#e4c282);color:#21172a;font-weight:800;padding:14px 15px;border-radius:12px;min-height:48px;box-shadow:0 4px 14px #0003}.btn.alt{background:#25304e;color:#f1edff;border-color:#566489}.btn.danger{border-color:#b05d7e;background:#512d43;color:#ffe3e8}.btn:active,.choice:active,.node:active{transform:scale(.97)}.btn.wide{width:100%}.btnrow{display:flex;gap:8px;flex-wrap:wrap}.btnrow>*{flex:1}.hero{position:relative;height:230px;border-radius:20px;overflow:hidden;background:radial-gradient(circle at 50% 32%,#544e86,#1d2345 53%,#111626);border:1px solid #6f608e;display:flex;align-items:center;justify-content:center;margin-bottom:12px}.hero:after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(transparent 65%,#0b1028a8)}.avatar{filter:drop-shadow(0 12px 15px #0009);font-size:116px;z-index:1;animation:float 3s ease-in-out infinite;line-height:1}.hero .level{position:absolute;bottom:14px;left:14px;z-index:2;font-weight:bold}.spark{position:absolute;font-size:25px;opacity:.8;animation:twinkle 3s infinite}.spark.a{top:30px;left:40px}.spark.b{top:60px;right:35px;animation-delay:1s}.spark.c{bottom:40px;right:60px;animation-delay:2s}@keyframes float{50%{transform:translateY(-9px)}}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center}.stat{padding:10px 6px;border-radius:10px;background:#0e1529}.stat b{font-size:17px}.nav{position:fixed;bottom:0;left:0;right:0;z-index:10;background:#11192df5;backdrop-filter:blur(12px);border-top:1px solid #455076;display:flex;justify-content:space-around;padding:9px max(10px,calc((100vw - 520px)/2)) calc(9px + env(safe-area-inset-bottom))}.nav button{border:0;background:none;color:#aeb9d9;font-size:10px;min-width:62px;padding:5px 2px}.nav button.sel{color:var(--gold)}.nav .ic{display:block;font-size:23px;margin-bottom:4px}.map{position:relative;padding:8px 0 20px}.region{padding:14px;border:1px solid #5b5275;border-radius:18px;margin-bottom:15px;background:radial-gradient(circle at top right,#40365d,#151e35 68%)}.region.locked{filter:grayscale(.7);opacity:.68}.nodes{display:flex;gap:8px;margin-top:13px}.node{flex:1;padding:12px 2px;border:1px solid #665b78;border-radius:12px;background:#242d4c;color:#fff;font-size:11px;min-height:74px}.node span{display:block;font-size:22px;margin-bottom:4px}.node.done{border-color:#66c6b3}.node.boss{border-color:#e7ae68;background:#46334d}.enemy{font-size:100px;filter:drop-shadow(0 10px 12px #000);transition:transform .22s,filter .22s;animation:float 2.7s infinite}.enemy.hit{transform:translateX(12px) rotate(8deg) scale(.9);filter:brightness(2)}.enemy.attack{transform:translateY(12px) scale(1.18)}.battlefield{height:205px;display:flex;align-items:center;justify-content:space-around;background:radial-gradient(ellipse at 50% 100%,#3e376d,#141d38 65%,#0e1527);border:1px solid #584f76;border-radius:18px;position:relative;overflow:hidden;margin:12px 0}.fighter{font-size:56px;filter:drop-shadow(0 8px 7px #0008)}.damage{position:absolute;top:50px;left:50%;color:#ffe58c;font-size:33px;font-weight:900;animation:pop .7s forwards;pointer-events:none}@keyframes pop{to{opacity:0;transform:translateY(-60px) scale(1.4)}}.choice{display:block;text-align:left;color:#ebf0ff;padding:13px;border:1px solid #465478;background:#222c49;border-radius:12px;width:100%;min-height:53px;margin:8px 0;font-size:14px}.choice.selected{background:#4a4273;border-color:#ccb377}.choice.correct{background:#194d42;border-color:#4fd6a8}.choice.wrong{background:#592c44;border-color:#ef758f}.tag{display:inline-block;border-radius:12px;background:#363756;color:#eacb8f;padding:4px 9px;font-size:11px;margin:3px 4px 3px 0}.progress{display:flex;justify-content:space-between;gap:12px;font-size:12px;color:#aebaec;margin:8px 0}.notice{padding:12px;border-left:3px solid var(--gold);background:#3b344a;margin:10px 0;border-radius:8px;font-size:13px;line-height:1.65}.answer-ex{font-size:13px;line-height:1.8}.screen-title{margin:8px 0 15px;font-size:23px}.pill{font-size:11px;padding:4px 8px;border:1px solid #71618b;border-radius:20px;color:#d3bdf9}.rowline{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:8px 0}.item{border:1px solid #3d4968;border-radius:12px;padding:13px;background:#141d34;margin:8px 0}.card-title{font-size:15px;font-weight:700;margin-bottom:5px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.meter{height:7px;border-radius:8px;background:#080d1c;overflow:hidden;margin:6px 0 12px}.meter i{height:100%;background:#9e84e5;display:block}.toast{position:fixed;top:calc(18px + env(safe-area-inset-top));left:50%;transform:translateX(-50%);max-width:90%;z-index:50;padding:14px 22px;border:1px solid #ecce88;border-radius:18px;background:#282342;color:#ffe6a5;font-weight:bold;box-shadow:0 10px 35px #000b;text-align:center;animation:float 2s 1}.input{background:#0e162b;color:#fff;border:1px solid #667092;border-radius:12px;width:100%;padding:14px;font-size:16px}.footer{font-size:11px;color:#95a4c6;text-align:center;padding:18px;line-height:1.6}.hidden{display:none}.modal{position:fixed;inset:0;background:#02040acc;z-index:30;display:flex;align-items:center;justify-content:center;padding:15px}.modal>.panel{width:min(100%,490px);max-height:85vh;overflow:auto}.reward{font-size:65px;text-align:center;margin:18px;animation:float 1.4s infinite}@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+</style></head><body><div id="app"></div><script>
+'use strict';
+const QUESTIONS=[
+  {
+    "id": 0,
+    "d": 0,
+    "tag": "Cloud",
+    "q": "クラウドの代表的な利点は？",
+    "opts": [
+      "必要なときに必要な量のリソースを利用できる",
+      "常に固定容量を購入する",
+      "物理サーバーの保守が必須",
+      "全停止が不可能になる"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "需要に合わせて迅速にリソースを確保し従量課金を活用できます。"
+  },
+  {
+    "id": 1,
+    "d": 0,
+    "tag": "Cloud",
+    "q": "設備投資を変動費に置き換える例は？",
+    "opts": [
+      "使用量に応じてクラウド料金を払う",
+      "5年分のサーバーを先行購入する",
+      "データセンターを新設する",
+      "電源設備を自社所有する"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "クラウドでは先行する大きな設備投資を抑えられます。"
+  },
+  {
+    "id": 2,
+    "d": 0,
+    "tag": "Region",
+    "q": "AWSリージョンとは？",
+    "opts": [
+      "地理的に離れた拠点群をまとめた単位",
+      "単一ラック",
+      "単一のEC2インスタンス",
+      "IAMのユーザー"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "リージョンは地理的な場所で、内部に複数のAZがあります。"
+  },
+  {
+    "id": 3,
+    "d": 0,
+    "tag": "AZ",
+    "q": "アベイラビリティゾーン（AZ）は何を意味する？",
+    "opts": [
+      "リージョン内の独立した1つ以上のデータセンター",
+      "世界共通の単一ネットワーク",
+      "請求書の分類",
+      "ストレージクラス"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "AZは電源やネットワークなどの障害分離を考慮した拠点です。"
+  },
+  {
+    "id": 4,
+    "d": 0,
+    "tag": "HA",
+    "q": "単一AZの障害にも耐えたい。適切な設計は？",
+    "opts": [
+      "複数AZにアプリケーションを配置",
+      "同じAZ内で名前だけ変更",
+      "IAMユーザーを増やす",
+      "請求アラームを削除"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "複数AZへの分散が可用性向上の基本です。"
+  },
+  {
+    "id": 5,
+    "d": 0,
+    "tag": "Elasticity",
+    "q": "伸縮性（Elasticity）の説明は？",
+    "opts": [
+      "需要変化に応じてリソースを増減する",
+      "すべての通信を暗号化する",
+      "ユーザーを手動登録する",
+      "監査ログを保存する"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "伸縮性は需要に合わせて資源を調整する特性です。"
+  },
+  {
+    "id": 6,
+    "d": 0,
+    "tag": "Scalability",
+    "q": "スケーラビリティは何を指す？",
+    "opts": [
+      "負荷の増大に対応できる能力",
+      "コストを常にゼロにする機能",
+      "データを必ず暗号化する処理",
+      "資格の自動更新"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "スケーラビリティは負荷増加に対応できる設計・能力です。"
+  },
+  {
+    "id": 7,
+    "d": 0,
+    "tag": "Cloud",
+    "q": "世界各地へ迅速に配信するクラウドの利点は？",
+    "opts": [
+      "グローバルなインフラを活用できる",
+      "単一端末しか使えない",
+      "設置工事が各国で必須",
+      "回線速度が必ず同じになる"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "リージョンやエッジ拠点など世界中の基盤を活用できます。"
+  },
+  {
+    "id": 8,
+    "d": 0,
+    "tag": "Well-Architected",
+    "q": "AWS Well-Architected Frameworkの目的は？",
+    "opts": [
+      "クラウド設計をベストプラクティスで評価する",
+      "EC2を自動停止する",
+      "月額料金を固定する",
+      "資格試験の解答を提供する"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "運用・セキュリティ・信頼性などの観点から設計を改善します。"
+  },
+  {
+    "id": 9,
+    "d": 0,
+    "tag": "CAF",
+    "q": "AWS Cloud Adoption Framework（CAF）は何を支援する？",
+    "opts": [
+      "クラウド導入と組織変革の計画",
+      "DDoSを直接遮断する",
+      "SQLを実行する",
+      "DNSを管理する"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "CAFはクラウド導入を組織・人・プロセス・技術面で支援します。"
+  },
+  {
+    "id": 10,
+    "d": 0,
+    "tag": "Migration",
+    "q": "リフト＆シフト移行とは？",
+    "opts": [
+      "大きな改修をせず既存システムを移す",
+      "サービスを全て廃止する",
+      "アプリを必ず作り直す",
+      "移行せずデータを消去する"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "リホストは基本的にアプリを大きく変えずに移行する方法です。"
+  },
+  {
+    "id": 11,
+    "d": 0,
+    "tag": "Pricing",
+    "q": "規模の経済によるAWSの利点は？",
+    "opts": [
+      "大規模運営の効率を顧客料金に反映できる",
+      "顧客ごとに発電所を建設する",
+      "すべて無料になる",
+      "物理保守を顧客に転嫁する"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "大規模に運営することによる効率化はクラウドの利点です。"
+  },
+  {
+    "id": 12,
+    "d": 1,
+    "tag": "IAM",
+    "q": "IAMの主な役割は？",
+    "opts": [
+      "AWSリソースへの認証と認可を管理する",
+      "Web配信を高速化する",
+      "SQLデータを保存する",
+      "請求額を予測する"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "IAMは誰が何にアクセスできるかを制御します。"
+  },
+  {
+    "id": 13,
+    "d": 1,
+    "tag": "MFA",
+    "q": "MFAを有効にする主な理由は？",
+    "opts": [
+      "パスワード以外の要素でサインインを強化する",
+      "EC2のCPU性能を上げる",
+      "S3容量を増やす",
+      "料金を固定する"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "多要素認証は認証要素を追加してアカウントを保護します。"
+  },
+  {
+    "id": 14,
+    "d": 1,
+    "tag": "Shared Responsibility",
+    "q": "EC2上のゲストOSへのセキュリティパッチの主な責任は？",
+    "opts": [
+      "利用者",
+      "AWSが常に全て実施",
+      "監査法人",
+      "インターネットプロバイダー"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "EC2ゲストOSのパッチ適用は原則として顧客側の責任です。"
+  },
+  {
+    "id": 15,
+    "d": 1,
+    "tag": "Shared Responsibility",
+    "q": "AWSが主に責任を負うものは？",
+    "opts": [
+      "データセンターの物理的なセキュリティ",
+      "IAM権限の適切な設定",
+      "顧客データの分類",
+      "顧客アプリケーションのコード"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "AWSはクラウド「の」セキュリティとして物理インフラなどを担当します。"
+  },
+  {
+    "id": 16,
+    "d": 1,
+    "tag": "IAM",
+    "q": "最小権限の原則とは？",
+    "opts": [
+      "必要な操作だけを許可する",
+      "すべてのユーザーを管理者にする",
+      "権限を期限なく拡大する",
+      "認証なしでアクセスを許す"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "業務に必要な最小限の権限を付与します。"
+  },
+  {
+    "id": 17,
+    "d": 1,
+    "tag": "CloudTrail",
+    "q": "誰がいつAWS APIを実行したか調べたい。使うのは？",
+    "opts": [
+      "AWS CloudTrail",
+      "Amazon CloudFront",
+      "Amazon RDS",
+      "AWS Budgets"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "CloudTrailはアカウントでのAPIアクティビティの記録・監査に使います。"
+  },
+  {
+    "id": 18,
+    "d": 1,
+    "tag": "CloudWatch",
+    "q": "CPU使用率に応じた監視アラームには？",
+    "opts": [
+      "Amazon CloudWatch",
+      "AWS IAM",
+      "AWS Shield",
+      "AWS Artifact"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "CloudWatchはメトリクスやログ、アラームの監視に使います。"
+  },
+  {
+    "id": 19,
+    "d": 1,
+    "tag": "WAF",
+    "q": "SQLインジェクションなどWebリクエストを検査するには？",
+    "opts": [
+      "AWS WAF",
+      "AWS Shieldのみ",
+      "Amazon S3",
+      "Amazon Route 53のみ"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "WAFはHTTP(S)リクエストをルールで検査・制御します。"
+  },
+  {
+    "id": 20,
+    "d": 1,
+    "tag": "Shield",
+    "q": "DDoS攻撃に対するAWSのマネージド保護は？",
+    "opts": [
+      "AWS Shield",
+      "Amazon RDS",
+      "AWS Budgets",
+      "AWS Organizationsのみ"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "ShieldはDDoS保護のためのサービスです。"
+  },
+  {
+    "id": 21,
+    "d": 1,
+    "tag": "KMS",
+    "q": "暗号鍵の作成・管理に利用するサービスは？",
+    "opts": [
+      "AWS Key Management Service（KMS）",
+      "Amazon Route 53",
+      "AWS CloudTrail",
+      "Amazon CloudFront"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "KMSは暗号鍵の管理や暗号化操作を支援します。"
+  },
+  {
+    "id": 22,
+    "d": 1,
+    "tag": "Secrets Manager",
+    "q": "データベースのパスワードを安全に保管しローテーションしたい。使うのは？",
+    "opts": [
+      "AWS Secrets Manager",
+      "Amazon CloudFront",
+      "AWS Cost Explorer",
+      "AWS Shield"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "Secrets Managerはシークレットを保護しローテーションを支援します。"
+  },
+  {
+    "id": 23,
+    "d": 1,
+    "tag": "Artifact",
+    "q": "AWSのコンプライアンス関連レポートを確認したい。使うのは？",
+    "opts": [
+      "AWS Artifact",
+      "AWS Lambda",
+      "Amazon SQS",
+      "Amazon EC2 Auto Scaling"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "ArtifactはAWSのコンプライアンス関連文書を取得するために利用します。"
+  },
+  {
+    "id": 24,
+    "d": 1,
+    "tag": "GuardDuty",
+    "q": "不審なアクティビティを継続的に検知するサービスは？",
+    "opts": [
+      "Amazon GuardDuty",
+      "Amazon Route 53",
+      "AWS Pricing Calculator",
+      "Amazon EBS"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "GuardDutyは脅威検出サービスです。"
+  },
+  {
+    "id": 25,
+    "d": 1,
+    "tag": "IAM",
+    "q": "長期アクセスキーをコードに埋め込む代わりにEC2で使うのは？",
+    "opts": [
+      "IAMロール",
+      "ルートユーザーのパスワード",
+      "パブリックなアクセスキー",
+      "S3の公開設定"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "EC2にはIAMロールによる一時的認証情報を使用するのが推奨です。"
+  },
+  {
+    "id": 26,
+    "d": 1,
+    "tag": "Root",
+    "q": "AWSルートユーザーの扱いで適切なのは？",
+    "opts": [
+      "MFAで保護し日常作業での利用を避ける",
+      "皆で認証情報を共有する",
+      "常にルートユーザーで作業する",
+      "アクセスキーをコードに公開する"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "ルートユーザーは強く保護して例外的な作業だけに利用します。"
+  },
+  {
+    "id": 27,
+    "d": 2,
+    "tag": "EC2",
+    "q": "Amazon EC2の主な機能は？",
+    "opts": [
+      "仮想サーバーを起動・運用する",
+      "DNSレコードのみ管理する",
+      "監査報告書を取得する",
+      "請求書だけ保存する"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "EC2はクラウド上の仮想コンピューティングです。"
+  },
+  {
+    "id": 28,
+    "d": 2,
+    "tag": "S3",
+    "q": "画像などのオブジェクトファイルを保存するには？",
+    "opts": [
+      "Amazon S3",
+      "Amazon RDS",
+      "AWS IAM",
+      "AWS WAF"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "S3はオブジェクトストレージです。"
+  },
+  {
+    "id": 29,
+    "d": 2,
+    "tag": "Lambda",
+    "q": "イベント発生時にコードを実行しサーバー管理を減らしたい。使うのは？",
+    "opts": [
+      "AWS Lambda",
+      "Amazon EBS",
+      "AWS Organizations",
+      "AWS Artifact"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "Lambdaはサーバーをプロビジョニングせずコードを実行できます。"
+  },
+  {
+    "id": 30,
+    "d": 2,
+    "tag": "RDS",
+    "q": "管理されたリレーショナルデータベースが必要。使うのは？",
+    "opts": [
+      "Amazon RDS",
+      "Amazon S3",
+      "Amazon CloudFront",
+      "AWS Shield"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "RDSはリレーショナルデータベースの運用作業を支援します。"
+  },
+  {
+    "id": 31,
+    "d": 2,
+    "tag": "DynamoDB",
+    "q": "フルマネージドのNoSQLキーバリューデータベースは？",
+    "opts": [
+      "Amazon DynamoDB",
+      "Amazon RDS",
+      "Amazon EBS",
+      "AWS CloudTrail"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "DynamoDBはサーバーレスのNoSQLデータベースです。"
+  },
+  {
+    "id": 32,
+    "d": 2,
+    "tag": "VPC",
+    "q": "AWSで論理的に分離された仮想ネットワークを構築するには？",
+    "opts": [
+      "Amazon VPC",
+      "AWS Budgets",
+      "Amazon Athena",
+      "AWS Artifact"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "VPCでAWSリソースの仮想ネットワークを定義します。"
+  },
+  {
+    "id": 33,
+    "d": 2,
+    "tag": "ELB",
+    "q": "複数のEC2に受信トラフィックを分散するには？",
+    "opts": [
+      "Elastic Load Balancing（ELB）",
+      "AWS CloudTrail",
+      "AWS IAM",
+      "Amazon S3 Glacier"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "ELBは複数ターゲットにトラフィックを分散します。"
+  },
+  {
+    "id": 34,
+    "d": 2,
+    "tag": "Auto Scaling",
+    "q": "Webアクセス増減に合わせEC2台数を自動調整したい。使うのは？",
+    "opts": [
+      "Amazon EC2 Auto Scaling",
+      "Amazon Route 53",
+      "AWS KMS",
+      "AWS CloudTrail"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "EC2 Auto Scalingは設定に従いインスタンス数を増減します。"
+  },
+  {
+    "id": 35,
+    "d": 2,
+    "tag": "CloudFront",
+    "q": "世界中の利用者への静的コンテンツ配信を高速化するには？",
+    "opts": [
+      "Amazon CloudFront",
+      "AWS IAM",
+      "Amazon RDS",
+      "AWS Budgets"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "CloudFrontはCDNとしてエッジからコンテンツを配信します。"
+  },
+  {
+    "id": 36,
+    "d": 2,
+    "tag": "Route 53",
+    "q": "ドメイン名をIPアドレスなどへ解決するマネージドDNSは？",
+    "opts": [
+      "Amazon Route 53",
+      "Amazon EC2",
+      "Amazon EBS",
+      "AWS Secrets Manager"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "Route 53はDNSサービスです。"
+  },
+  {
+    "id": 37,
+    "d": 2,
+    "tag": "EBS",
+    "q": "EC2用の永続的なブロックストレージには？",
+    "opts": [
+      "Amazon EBS",
+      "Amazon Route 53",
+      "AWS WAF",
+      "Amazon SNS"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "EBSはEC2などで利用するブロックストレージです。"
+  },
+  {
+    "id": 38,
+    "d": 2,
+    "tag": "EFS",
+    "q": "複数Linuxインスタンスから共有できるファイルストレージは？",
+    "opts": [
+      "Amazon EFS",
+      "Amazon EBSの単一通常ボリューム",
+      "AWS CloudTrail",
+      "Amazon CloudFront"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "EFSは伸縮可能な共有ファイルストレージです。"
+  },
+  {
+    "id": 39,
+    "d": 2,
+    "tag": "SQS",
+    "q": "システム間のメッセージをキューで疎結合にしたい。使うのは？",
+    "opts": [
+      "Amazon SQS",
+      "Amazon RDS",
+      "AWS Shield",
+      "AWS Artifact"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "SQSはマネージドメッセージキューです。"
+  },
+  {
+    "id": 40,
+    "d": 2,
+    "tag": "SNS",
+    "q": "複数購読者に通知を配信するPub/Subサービスは？",
+    "opts": [
+      "Amazon SNS",
+      "Amazon EBS",
+      "Amazon VPC",
+      "AWS Cost Explorer"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "SNSはメッセージのファンアウト通知などに利用します。"
+  },
+  {
+    "id": 41,
+    "d": 2,
+    "tag": "CloudFormation",
+    "q": "インフラ構成をテンプレートで管理するには？",
+    "opts": [
+      "AWS CloudFormation",
+      "Amazon S3 Glacier",
+      "AWS Shield",
+      "Amazon Route 53"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "CloudFormationはInfrastructure as Codeのサービスです。"
+  },
+  {
+    "id": 42,
+    "d": 2,
+    "tag": "AWS Organizations",
+    "q": "複数AWSアカウントの一元管理には？",
+    "opts": [
+      "AWS Organizations",
+      "Amazon RDS",
+      "AWS WAF",
+      "Amazon CloudFront"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "Organizationsは複数アカウントの管理とガバナンスに使います。"
+  },
+  {
+    "id": 43,
+    "d": 2,
+    "tag": "S3 Glacier",
+    "q": "長期保管のアーカイブストレージ用途に適したものは？",
+    "opts": [
+      "Amazon S3 Glacier系ストレージクラス",
+      "Amazon EC2 Auto Scaling",
+      "AWS IAM",
+      "Amazon Route 53"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "S3 Glacier系は取得特性に応じて低コストのアーカイブ保管を提供します。"
+  },
+  {
+    "id": 44,
+    "d": 2,
+    "tag": "AWS Direct Connect",
+    "q": "オンプレミスからAWSへ専用線接続を構築するのは？",
+    "opts": [
+      "AWS Direct Connect",
+      "AWS CloudTrail",
+      "Amazon SNS",
+      "AWS Budgets"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "Direct Connectは専用ネットワーク接続を提供します。"
+  },
+  {
+    "id": 45,
+    "d": 2,
+    "tag": "Athena",
+    "q": "S3上のデータを標準SQLで直接分析したい。使うのは？",
+    "opts": [
+      "Amazon Athena",
+      "AWS IAM",
+      "AWS WAF",
+      "Amazon Route 53"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "AthenaはS3上のデータをSQLで分析できるサーバーレスのクエリサービスです。"
+  },
+  {
+    "id": 46,
+    "d": 2,
+    "tag": "Redshift",
+    "q": "データウェアハウス向けサービスは？",
+    "opts": [
+      "Amazon Redshift",
+      "AWS Shield",
+      "Amazon EBS",
+      "AWS IAM"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "Redshiftは分析用データウェアハウスです。"
+  },
+  {
+    "id": 47,
+    "d": 3,
+    "tag": "Spot",
+    "q": "夜間の中断可能なバッチ処理を安価に実行したい。適切なのは？",
+    "opts": [
+      "EC2スポットインスタンス",
+      "オンデマンドのみ",
+      "専用ホストのみ",
+      "常に最大台数のオンデマンド"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "スポットは空きキャパシティを割安に利用しますが中断される可能性があります。"
+  },
+  {
+    "id": 48,
+    "d": 3,
+    "tag": "On-Demand",
+    "q": "予測不能な短期利用で長期契約を避けたい。適切なのは？",
+    "opts": [
+      "オンデマンドインスタンス",
+      "リザーブドインスタンスだけ",
+      "長期Savings Plansを必須とする",
+      "全てスポットに限定する"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "オンデマンドは長期契約なしで利用量に応じ課金されます。"
+  },
+  {
+    "id": 49,
+    "d": 3,
+    "tag": "Savings Plans",
+    "q": "一定使用量のコミットでコンピューティング料金を削減するのは？",
+    "opts": [
+      "Savings Plans",
+      "AWS Shield",
+      "AWS IAM",
+      "Amazon Route 53"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "Savings Plansは一定の利用額コミットにより対象コンピューティング料金を割引します。"
+  },
+  {
+    "id": 50,
+    "d": 3,
+    "tag": "Reserved Instances",
+    "q": "安定したEC2利用を1年または3年単位で割引したい。選択肢は？",
+    "opts": [
+      "リザーブドインスタンス",
+      "AWS WAF",
+      "Amazon CloudFront",
+      "Amazon Route 53"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "リザーブドインスタンスは条件に応じた料金割引モデルです。"
+  },
+  {
+    "id": 51,
+    "d": 3,
+    "tag": "Budgets",
+    "q": "コストが設定した予算を超えそうなとき通知したい。使うのは？",
+    "opts": [
+      "AWS Budgets",
+      "AWS CloudTrail",
+      "Amazon DynamoDB",
+      "Amazon EBS"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "Budgetsは予算・予測とアラートを設定できます。"
+  },
+  {
+    "id": 52,
+    "d": 3,
+    "tag": "Cost Explorer",
+    "q": "月ごとのAWS利用料の傾向を可視化・分析したい。使うのは？",
+    "opts": [
+      "AWS Cost Explorer",
+      "Amazon Route 53",
+      "AWS WAF",
+      "Amazon SQS"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "Cost Explorerはコスト・使用量の分析に利用します。"
+  },
+  {
+    "id": 53,
+    "d": 3,
+    "tag": "Pricing Calculator",
+    "q": "導入前にAWS利用料金を見積もりたい。使うのは？",
+    "opts": [
+      "AWS Pricing Calculator",
+      "AWS CloudTrail",
+      "Amazon GuardDuty",
+      "Amazon EFS"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "Pricing Calculatorは構成に基づく料金見積もりを作成します。"
+  },
+  {
+    "id": 54,
+    "d": 3,
+    "tag": "Consolidated Billing",
+    "q": "AWS Organizationsの一括請求のメリットは？",
+    "opts": [
+      "複数アカウントの請求をまとめられる",
+      "全サービスが必ず無料になる",
+      "ルートアカウントが廃止される",
+      "全EC2が自動停止する"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "一括請求は組織内の請求統合を支援します。"
+  },
+  {
+    "id": 55,
+    "d": 3,
+    "tag": "Free Tier",
+    "q": "AWS Free Tierに関して正しいのは？",
+    "opts": [
+      "対象サービスと無料枠の条件を確認する必要がある",
+      "全ての利用が無期限無料",
+      "無料枠なら支払い設定不要と断定できる",
+      "超過利用でも費用は発生しない"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "無料利用には対象や条件があり、超過などによって費用が発生し得ます。"
+  },
+  {
+    "id": 56,
+    "d": 3,
+    "tag": "Cost",
+    "q": "利用終了後も不要なリソースを放置した場合は？",
+    "opts": [
+      "リソースによって課金が継続する場合がある",
+      "AWSが必ず全て即座に削除する",
+      "請求は必ずゼロになる",
+      "すべての料金は返金される"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "稼働や保存状態などにより料金がかかる場合があります。"
+  },
+  {
+    "id": 57,
+    "d": 3,
+    "tag": "Support",
+    "q": "技術サポートの利用を検討する際に確認するのは？",
+    "opts": [
+      "最新のAWS Supportプランの機能と料金",
+      "S3のオブジェクトキーだけ",
+      "IAMの表示名だけ",
+      "AZの略称だけ"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "サポートプランの名称・機能・料金は最新の公式案内で確認します。"
+  },
+  {
+    "id": 58,
+    "d": 3,
+    "tag": "Cost Allocation Tags",
+    "q": "部門ごとのコストを把握しやすくしたい。使うのは？",
+    "opts": [
+      "コスト配分タグ",
+      "MFAのみ",
+      "Route 53ヘルスチェックのみ",
+      "AWS Shieldのみ"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "コスト配分タグでリソースの費用を部門などに分類できます。"
+  },
+  {
+    "id": 59,
+    "d": 1,
+    "tag": "IAM",
+    "q": "IAMのセキュリティの推奨事項を2つ選べ。",
+    "opts": [
+      "最小権限を適用する",
+      "MFAを利用する",
+      "全ユーザーにAdministratorAccessを付ける",
+      "アクセスキーを公開リポジトリに保存する"
+    ],
+    "correct": [
+      0,
+      1
+    ],
+    "ex": "最小権限とMFAは基本的なセキュリティ対策です。"
+  },
+  {
+    "id": 60,
+    "d": 2,
+    "tag": "HA",
+    "q": "Webサービスの高可用性に貢献する構成を2つ選べ。",
+    "opts": [
+      "複数AZへの配置",
+      "ロードバランサーによる分散",
+      "単一AZの単一EC2だけを使う",
+      "アクセスログを削除する"
+    ],
+    "correct": [
+      0,
+      1
+    ],
+    "ex": "冗長化とロードバランサーの組み合わせが可用性に貢献します。"
+  },
+  {
+    "id": 61,
+    "d": 3,
+    "tag": "Spot",
+    "q": "スポットインスタンスが適するワークロードの特性を2つ選べ。",
+    "opts": [
+      "中断に耐えられる",
+      "処理を再実行できる",
+      "絶対に中断できない",
+      "常時固定価格が保証される"
+    ],
+    "correct": [
+      0,
+      1
+    ],
+    "ex": "スポットはAWSによる中断に対応できる処理で利用します。"
+  },
+  {
+    "id": 62,
+    "d": 0,
+    "tag": "Cloud",
+    "q": "クラウド利用のメリットを2つ選べ。",
+    "opts": [
+      "需要に合わせたリソース調整",
+      "世界各地への展開を加速",
+      "すべての障害を完全に回避",
+      "全サービスが必ず無償"
+    ],
+    "correct": [
+      0,
+      1
+    ],
+    "ex": "伸縮性とグローバル展開の容易さは主なメリットです。"
+  },
+  {
+    "id": 63,
+    "d": 1,
+    "tag": "Inspector",
+    "q": "EC2のソフトウェア脆弱性検査を支援するのは？",
+    "opts": [
+      "Amazon Inspector",
+      "Amazon Route 53",
+      "AWS Budgets",
+      "Amazon SQS"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "Inspectorは対象のワークロードに対する脆弱性管理を支援します。"
+  },
+  {
+    "id": 64,
+    "d": 2,
+    "tag": "API Gateway",
+    "q": "REST APIなどのAPIを作成・管理するには？",
+    "opts": [
+      "Amazon API Gateway",
+      "Amazon EBS",
+      "AWS Artifact",
+      "AWS Shield"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "API GatewayはAPIの作成・公開・管理を支援します。"
+  },
+  {
+    "id": 65,
+    "d": 2,
+    "tag": "Fargate",
+    "q": "コンテナ向けのサーバーレスコンピューティングには？",
+    "opts": [
+      "AWS Fargate",
+      "Amazon Route 53",
+      "AWS Cost Explorer",
+      "AWS KMS"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "Fargateはサーバーを直接管理せずコンテナを実行できます。"
+  },
+  {
+    "id": 66,
+    "d": 0,
+    "tag": "Reliability",
+    "q": "障害復旧の目標時間を表す指標は？",
+    "opts": [
+      "RTO",
+      "RPO",
+      "MFA",
+      "IAM"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "RTOは復旧までに許容される時間の目標、RPOは許容データ損失の時点目標です。"
+  },
+  {
+    "id": 67,
+    "d": 3,
+    "tag": "Cost",
+    "q": "コスト最適化の方法として適切なのは？",
+    "opts": [
+      "需要に合わせて不要なリソースを削減する",
+      "常に最大サイズを使う",
+      "すべてのログを公開する",
+      "未使用リソースを増やし続ける"
+    ],
+    "correct": [
+      0
+    ],
+    "ex": "適正サイズ化や未使用リソース削除はコスト最適化の基本です。"
+  }
+];
+const REGIONS=[{name:'クラウドの草原',icon:'🌿',title:'霧の目覚め',monsters:['🦇','🐺','🌪️','🐉'],boss:'虚空の竜',desc:'クラウドの基礎と世界の構造を学ぶ'},{name:'セキュリティの古城',icon:'🏰',title:'封印された門',monsters:['🕷️','👻','🛡️','👹'],boss:'権限の暴君',desc:'アクセス権限と守護術を習得する'},{name:'AWSサービスの機械都市',icon:'⚙️',title:'歯車と魔導機関',monsters:['🤖','⚡','🦾','👾'],boss:'暴走する機神',desc:'AWSの主要サービスを見極める'},{name:'コストの王国',icon:'👑',title:'黄金と契約',monsters:['💰','🦂','🪙','😈'],boss:'浪費の魔王',desc:'費用の最適化と支援体制を極める'}];
+const ITEMS=[{id:'blade',name:'白銀の長剣',icon:'⚔️',cost:90,atk:4,def:0},{id:'staff',name:'星雲の杖',icon:'🪄',cost:230,atk:9,def:0},{id:'armor',name:'守護の鎧',icon:'🛡️',cost:130,atk:0,def:3},{id:'plate',name:'竜鱗の鎧',icon:'🥋',cost:280,atk:0,def:7},{id:'potion',name:'回復薬',icon:'🧪',cost:35,heal:35}];
+const KEY='aws_quest_save_v1';const $=s=>document.querySelector(s);const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));const today=()=>new Date().toLocaleDateString('sv-SE');
+const fresh=()=>({name:'冒険者',level:1,xp:0,gold:80,hp:100,completed:[],owned:[],weapon:'',armor:'',potions:2,history:{},sessions:0,streak:0,lastDay:'',lastBonus:'',studySeconds:0,answersToday:0,todayDay:today(),sound:true,logs:[],seen:[],achievements:[]});
+let S;try{S={...fresh(),...JSON.parse(localStorage.getItem(KEY)||'{}')}}catch(e){S=fresh()}S.history=S.history||{};S.completed=S.completed||[];S.owned=S.owned||[];S.seen=S.seen||[];S.logs=S.logs||[];let view='home',battle=null,exam=null,toastTimer,started=Date.now(),mockTimer=null;
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){console.warn('save failed',e)}}
+function daily(){let t=today();if(S.todayDay!==t){S.todayDay=t;S.answersToday=0}if(S.lastBonus!==t){let prev=new Date(Date.now()-864e5).toLocaleDateString('sv-SE');S.streak=S.lastBonus===prev?S.streak+1:1;S.gold+=30+Math.min(S.streak,7)*5;S.lastBonus=t;pop('🎁 ログイン報酬 +'+(30+Math.min(S.streak,7)*5)+'G');}save()}
+function pop(msg){clearTimeout(toastTimer);let el=$('#toast');if(el)el.remove();let d=document.createElement('div');d.className='toast';d.id='toast';d.textContent=msg;document.body.appendChild(d);toastTimer=setTimeout(()=>d.remove(),2400)}
+function audio(kind){if(!S.sound)return;try{let a=new(window.AudioContext||window.webkitAudioContext)(),o=a.createOscillator(),g=a.createGain();o.connect(g);g.connect(a.destination);o.type='sine';o.frequency.setValueAtTime(kind==='hit'?650:kind==='bad'?170:920,a.currentTime);o.frequency.exponentialRampToValueAtTime(kind==='bad'?110:440,a.currentTime+.13);g.gain.setValueAtTime(.045,a.currentTime);g.gain.exponentialRampToValueAtTime(.001,a.currentTime+.19);o.start();o.stop(a.currentTime+.2);setTimeout(()=>a.close(),350)}catch(e){}}
+function levelMax(){return 70+S.level*45}function maxHp(){return 100+(S.level-1)*12}function atk(){return 12+S.level*3+(ITEMS.find(i=>i.id===S.weapon)?.atk||0)}function defense(){return 2+Math.floor(S.level/2)+(ITEMS.find(i=>i.id===S.armor)?.def||0)}
+function xpGain(x){S.xp+=x;let ups=0;while(S.xp>=levelMax()){S.xp-=levelMax();S.level++;ups++;S.hp=maxHp()}if(ups){pop('✨ LEVEL UP! Lv.'+S.level);audio('win')}save()}
+function track(q,ok){let h=S.history[q.id]||{right:0,wrong:0,last:0,next:0};h[ok?'right':'wrong']++;h.last=Date.now();h.next=Date.now()+(ok?Math.min(7,1+h.right)*864e5:8*36e5);S.history[q.id]=h;S.answersToday++;S.seen=[q.id,...S.seen.filter(x=>x!==q.id)].slice(0,28);save()}
+function pick(pool){let sorted=[...pool].sort((a,b)=>{let ha=S.history[a.id]||{},hb=S.history[b.id]||{};const score=x=>{let h=S.history[x.id]||{};return (h.wrong||0)*2-(h.right||0)*.25+(h.next&&h.next<Date.now()?4:0)+(S.seen.slice(0,7).includes(x.id)?-12:0)+((x.tag==='Spot'||x.tag==='Auto Scaling'||x.d===1)&&!h.last?3:0)+Math.random()*5};return score(b)-score(a)});return sorted[0]||QUESTIONS[Math.floor(Math.random()*QUESTIONS.length)]}
+function shuffledQ(q){let opts=q.opts.map((t,i)=>({t,i}));for(let i=opts.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[opts[i],opts[j]]=[opts[j],opts[i]]}return {...q,order:opts,correctPositions:opts.map((x,i)=>q.correct.includes(x.i)?i:-1).filter(x=>x>=0)}}
+function navHtml(){return `<nav class="nav">${[['home','🏕️','拠点'],['map','🗺️','冒険'],['review','📖','復習'],['shop','⚔️','装備'],['exam','📝','模試']].map(([v,i,t])=>`<button class="${view===v?'sel':''}" onclick="go('${v}')"><span class="ic">${i}</span>${t}</button>`).join('')}</nav>`}
+function frame(content){$('#app').innerHTML=`<header class="header"><div><div class="logo">AWS QUEST</div><h1>クラウドの覇者</h1></div><div style="text-align:right"><div class="gold">🪙 ${S.gold} G</div><div class="tiny muted">Lv.${S.level} ${esc(S.name)}</div></div></header><main class="wrap">${content}</main>${navHtml()}<div class="footer">AWSサービスの魔法表現は学習上の比喩です。実際のサービス動作とは異なります。<br>非公式の学習ゲーム / ローカル端末内に自動保存</div>`}
+function go(v){if(battle&&v!=='battle'){battle=null}if(exam&&v!=='examplay'&&v!=='examresult'){if(!confirm('模擬試験を中断しますか？'))return;exam=null;clearInterval(mockTimer)}view=v;render();scrollTo(0,0)}
+function render(){if(view==='home')home();else if(view==='map')map();else if(view==='battle')battleUI();else if(view==='result')winUI();else if(view==='review')review();else if(view==='shop')shop();else if(view==='exam')examHome();else if(view==='examplay')examUI();else if(view==='examresult')examResult();}
+function home(){let progress=S.completed.length,accuracy=stats(QUESTIONS).accuracy;frame(`<div class="hero"><span class="spark a">✧</span><span class="spark b">✦</span><span class="spark c">✧</span><div class="avatar">${S.level>=15?'🧙':S.level>=7?'🥷':'🧝'}</div><div class="level">${esc(S.name)} · Lv.${S.level} / ${progress}/16 STAGES</div></div><section class="panel"><div class="rowline"><b>クラウド騎士の記録</b><button class="btn alt" style="padding:8px;min-height:32px" onclick="rename()">名前変更</button></div><div class="progress"><span>EXP ${S.xp}/${levelMax()}</span><span>次のレベルまで ${levelMax()-S.xp}</span></div><div class="bar"><i style="width:${100*S.xp/levelMax()}%"></i></div><div class="progress"><span>HP ${S.hp}/${maxHp()}</span><span>攻撃 ${atk()} / 防御 ${defense()}</span></div><div class="bar hp"><i style="width:${100*S.hp/maxHp()}%"></i></div><div class="stats" style="margin-top:14px"><div class="stat">🔥<br><b>${S.streak}日</b><div class="tiny muted">連続ログイン</div></div><div class="stat">🎯<br><b>${accuracy}%</b><div class="tiny muted">正答率</div></div><div class="stat">📚<br><b>${S.answersToday}/10</b><div class="tiny muted">今日の目標</div></div></div></section><button class="btn wide" onclick="go('map')">⚔️ 冒険に出発する</button><div class="panel" style="margin-top:14px"><h2>📜 今日の使命</h2><div class="small muted">10問に挑戦して学習習慣を育てよう</div><div class="meter"><i style="width:${Math.min(100,S.answersToday*10)}%"></i></div><div class="rowline"><span class="small">達成度 ${Math.min(S.answersToday,10)}/10</span><span class="gold small">${S.answersToday>=10?'✨ 達成！':'あと'+Math.max(0,10-S.answersToday)+'問'}</span></div><div class="btnrow"><button class="btn alt" onclick="go('review')">📖 弱点を復習</button><button class="btn alt" onclick="toggleSound()">${S.sound?'🔊':'🔇'} 効果音</button></div></div><div class="panel"><h2>🕰️ 冒険の足跡</h2><p class="small muted">回答数 ${Object.values(S.history).reduce((n,h)=>n+h.right+h.wrong,0)}問 / 勝利 ${S.sessions}回 / 学習時間 約${Math.floor(S.studySeconds/60)}分</p><div class="tiny muted" style="margin-top:8px">最初に重点復習：セキュリティ・スポット・Auto Scaling</div></div>`)}
+function rename(){let n=prompt('冒険者の名前を入力（12文字以内）',S.name);if(n!==null){S.name=n.trim().slice(0,12)||'冒険者';save();render()}}
+function toggleSound(){S.sound=!S.sound;save();render()}
+function map(){frame(`<h2 class="screen-title">🗺️ クラウディア世界地図</h2><p class="small muted" style="margin-bottom:14px">各章の試練を突破し、最後のボスを討伐して次の地域を解放。</p><div class="map">${REGIONS.map((r,d)=>{let unlocked=d===0||S.completed.includes((d-1)*4+3),count=S.completed.filter(x=>Math.floor(x/4)===d).length;return `<div class="region ${unlocked?'':'locked'}"><div class="rowline"><div><div class="tiny gold">第${d+1}章 · ${r.title}</div><h2 style="font-size:19px;margin:5px 0">${r.icon} ${r.name}</h2></div><b>${unlocked?count+'/4':'🔒'}</b></div><div class="small muted">${r.desc}</div><div class="nodes">${r.monsters.map((m,i)=>{let id=d*4+i,done=S.completed.includes(id),can=unlocked&&(i===0||S.completed.includes(id-1));return `<button class="node ${done?'done':''} ${i===3?'boss':''}" ${can?'':'disabled'} onclick="startBattle(${d},${i})"><span>${!can?'🔒':done?'✅':m}</span>${i===3?'BOSS':i===2?'中ボス':'試練'+(i+1)}</button>`}).join('')}</div></div>`}).join('')}</div>`)}
+function startBattle(d,i,mode='story'){if(S.hp<=0)S.hp=Math.ceil(maxHp()/2);let boss=i===3,mini=i===2;let difficulty=1+d*0.32+(boss?.4:mini?.2:0);battle={d,i,mode,boss,enemy:REGIONS[d].monsters[i],name:boss?REGIONS[d].boss:mini?'上級守護者':'霧の魔獣',max:Math.round((boss?115:mini?85:62)*difficulty),hp:0,combo:0,correct:0,total:0,selected:[],answered:false,start:Date.now(),q:null,used:[],result:null};battle.hp=battle.max;view='battle';nextQuestion();render()}
+function nextQuestion(){if(!battle)return;let pool=QUESTIONS.filter(q=>q.d===battle.d&&!battle.used.includes(q.id));if(battle.mode==='review'){let wrong=QUESTIONS.filter(q=>(S.history[q.id]?.wrong||0)>0&&!battle.used.includes(q.id));pool=wrong.length?wrong:QUESTIONS.filter(q=>!battle.used.includes(q.id))}if(!pool.length){battle.used=[];pool=QUESTIONS.filter(q=>q.d===battle.d)}let q=pick(pool);battle.used.push(q.id);battle.q=shuffledQ(q);battle.selected=[];battle.answered=false;battle.start=Date.now()}
+function battleUI(){let b=battle;if(!b)return go('map');let q=b.q,ratio=Math.max(0,100*b.hp/b.max),pr=Math.max(0,100*S.hp/maxHp());frame(`<div class="rowline"><button class="btn alt" style="padding:9px;min-height:38px" onclick="exitBattle()">← 撤退</button><span class="pill">${b.mode==='review'?'復習戦':`第${b.d+1}章 ${b.boss?'BOSS':'STAGE '+(b.i+1)}`}</span><span class="pill">🔥 ${b.combo} COMBO</span></div><div class="progress"><span>敵: ${b.name}</span><span>${Math.max(0,b.hp)}/${b.max} HP</span></div><div class="bar hp"><i style="width:${ratio}%"></i></div><div class="battlefield"><div class="fighter">${S.level>=7?'🥷':'🧝'}</div><div class="enemy" id="enemy">${b.enemy}</div><div id="damage"></div></div><div class="progress"><span>冒険者 ${S.name}</span><span>HP ${S.hp}/${maxHp()}</span></div><div class="bar hp"><i style="width:${pr}%"></i></div><section class="panel" style="margin-top:14px"><div class="rowline"><span class="pill">${['クラウド','セキュリティ','サービス','料金'][q.d]}</span><span class="tiny muted">${q.correct.length===2?'2つ選択':'1つ選択'} · ${q.tag}</span></div><h2 style="font-size:16px;line-height:1.55;margin:12px 0">${esc(q.q)}</h2>${q.order.map((o,n)=>`<button class="choice ${b.selected.includes(n)?'selected':''} ${b.answered?(q.correctPositions.includes(n)?'correct':b.selected.includes(n)?'wrong':''):''}" ${b.answered?'disabled':''} onclick="choose(${n})"><b style="color:#d2b987">${'ABCD'[n]}.</b> ${esc(o.t)}</button>`).join('')}${b.answered?`<div class="notice"><b>${b.result.ok?'✅ 正解！':'❌ 不正解'} ${b.result.msg}</b><div class="answer-ex">${esc(q.ex)}<br><b>正解：</b>${q.correctPositions.map(n=>esc(q.order[n].t)).join(' / ')}<br><b>不正解の理由：</b>${q.order.filter(o=>!q.correct.includes(o.i)).map(o=>esc(o.t)+'は、この問いに必要な「'+esc(q.opts[q.correct[0]])+'」の機能・条件を満たさない。').join(' ')}</div></div><button class="btn wide" onclick="advance()">${b.hp<=0?'戦利品を受け取る':S.hp<=0?'拠点へ戻る':'次の一撃へ →'}</button>`:q.correct.length>1?`<button class="btn wide" ${b.selected.length!==q.correct.length?'disabled':''} onclick="submitAnswer()">この${q.correct.length}つで回答</button>`:''}</section>`)}
+function choose(n){let b=battle;if(!b||b.answered)return;let need=b.q.correct.length;if(need===1){b.selected=[n];submitAnswer();return}if(b.selected.includes(n))b.selected=b.selected.filter(x=>x!==n);else if(b.selected.length<need)b.selected.push(n);battleUI()}
+function submitAnswer(){let b=battle;if(!b||b.answered||b.selected.length!==b.q.correct.length)return;let ok=b.selected.every(n=>b.q.correctPositions.includes(n));b.answered=true;b.total++;track(b.q,ok);let elapsed=(Date.now()-b.start)/1000;if(ok){b.combo++;b.correct++;let damage=atk()+Math.min(20,b.combo*3)+(elapsed<8?Math.round(atk()*.55):0);b.hp=Math.max(0,b.hp-damage);b.result={ok:true,msg:`${damage}ダメージ！${elapsed<8?' ⚡クリティカル':''}`};audio('hit')}else{b.combo=0;let dmg=Math.max(4,Math.round((13+b.d*6+(b.boss?7:0))-defense()));S.hp=Math.max(0,S.hp-dmg);b.result={ok:false,msg:`敵の反撃 −${dmg}HP`};audio('bad')}S.studySeconds+=Math.max(3,Math.min(120,Math.round(elapsed)));save();battleUI();let en=$('#enemy');if(en){en.classList.add(ok?'hit':'attack');setTimeout(()=>en.classList.remove('hit','attack'),400)}let dd=$('#damage');if(dd)dd.innerHTML=`<div class="damage">${ok?'-'+(b.max-b.hp):'MISS'}</div>`}
+function advance(){let b=battle;if(!b||!b.answered)return;if(b.hp<=0){finishBattle();return}if(S.hp<=0){pop('💔 戦闘不能… 拠点で回復');battle=null;go('home');return}nextQuestion();battleUI()}
+function exitBattle(){if(confirm('戦闘を中断しますか？ それまでの回答履歴は保存されます。')){battle=null;go('map')}}
+function finishBattle(){let b=battle,bid=b.d*4+b.i,first=!S.completed.includes(bid);if(first&&b.mode==='story')S.completed.push(bid);let xp=(b.boss?95:50)+b.d*14, gold=(b.boss?70:32)+b.d*12;S.gold+=gold;S.sessions++;if(b.boss)S.logs.unshift({day:today(),name:b.name});S.logs=S.logs.slice(0,20);xpGain(xp);S.hp=Math.min(maxHp(),S.hp+Math.round(maxHp()*.3));save();battle={...b,rewards:{xp,gold,first}};view='result';render();audio('win')}
+function winUI(){let b=battle;if(!b)return go('map');frame(`<div class="panel" style="text-align:center;margin-top:20px"><div class="gold tiny">QUEST CLEAR</div><h2 style="font-size:30px;margin:12px">${b.boss?'🏆 魔王軍を撃破！':'⚔️ 勝利！'}</h2><div class="reward">🎁</div><div class="small muted">${esc(b.name)} を討伐した！</div><div class="stats" style="margin:20px 0"><div class="stat">✨<br><b>+${b.rewards.xp}</b><div class="tiny">EXP</div></div><div class="stat">🪙<br><b>+${b.rewards.gold}</b><div class="tiny">GOLD</div></div><div class="stat">🎯<br><b>${b.correct}/${b.total}</b><div class="tiny">正解</div></div></div>${b.boss?'<div class="notice">🔓 次の章が解放されました（最終章は全クリア！）</div>':''}<button class="btn wide" onclick="battle=null;go('map')">ワールドマップへ →</button></div>`)}
+function stats(pool){let n=0,r=0;pool.forEach(q=>{let h=S.history[q.id];if(h){n+=h.right+h.wrong;r+=h.right}});return {n,r,accuracy:n?Math.round(100*r/n):0}}
+function review(){let wrong=QUESTIONS.filter(q=>S.history[q.id]?.wrong>0).sort((a,b)=>(S.history[b.id].wrong-S.history[a.id].wrong)),due=wrong.filter(q=>(S.history[q.id].next||0)<=Date.now());frame(`<h2 class="screen-title">📖 復習の書</h2><div class="panel"><h2>知識は、敗北から鍛えられる</h2><div class="stats"><div class="stat">🩹<br><b>${wrong.length}</b><div class="tiny">間違えた問題</div></div><div class="stat">⏳<br><b>${due.length}</b><div class="tiny">復習の時期</div></div><div class="stat">📚<br><b>${stats(QUESTIONS).accuracy}%</b><div class="tiny">正答率</div></div></div><button class="btn wide" style="margin-top:14px" onclick="startReview()">⚔️ ${wrong.length?'弱点':'総合'}復習バトル</button></div><div class="panel"><h2>分野別の成績</h2>${REGIONS.map((r,d)=>{let s=stats(QUESTIONS.filter(q=>q.d===d));return `<div class="rowline small"><span>${r.icon} ${r.name}</span><b>${s.accuracy}% <span class="muted">(${s.n}問)</span></b></div><div class="meter"><i style="width:${s.accuracy}%"></i></div>`}).join('')}</div><div class="panel"><h2>苦手なサービス</h2>${[...new Set(wrong.map(q=>q.tag))].map(tag=>({tag,n:wrong.filter(q=>q.tag===tag).reduce((v,q)=>v+S.history[q.id].wrong,0)})).sort((a,b)=>b.n-a.n).slice(0,8).map(x=>`<div class="rowline small"><span>${esc(x.tag)}</span><span class="gold">${x.n}回ミス</span></div>`).join('')||'<div class="small muted">まだ間違いの記録はありません。</div>'}</div><div class="panel"><h2>間違えた問題</h2>${wrong.slice(0,20).map(q=>`<div class="item"><div class="small">${esc(q.q)}</div><div class="tiny muted">${q.tag} · ${S.history[q.id].wrong}回ミス / ${S.history[q.id].right}回正解</div><div class="tiny gold">答え：${q.correct.map(i=>q.opts[i]).join(' / ')}</div></div>`).join('')||'<div class="small muted">冒険の中で出会った問題が記録されます。</div>'}</div>`)}
+function startReview(){startBattle(1,1,'review');battle.enemy='📕';battle.name='記憶の番人';battle.max=95;battle.hp=95;render()}
+function shop(){frame(`<h2 class="screen-title">⚔️ 鍛冶屋と装備</h2><div class="panel"><div class="rowline"><b>🪙 所持金 ${S.gold} G</b><span class="pill">攻撃 ${atk()} / 防御 ${defense()}</span></div><div class="small muted">装備は攻撃力・防御力を上げる。回復薬でHPを回復しよう。</div></div>${ITEMS.map(it=>{let owned=S.owned.includes(it.id),equipped=S.weapon===it.id||S.armor===it.id;return `<div class="item"><div class="rowline"><div><div class="card-title">${it.icon} ${it.name}</div><div class="small muted">${it.heal?'HP +'+it.heal:it.atk?'攻撃 +'+it.atk:'防御 +'+it.def} · ${it.cost}G</div></div><button class="btn ${equipped?'alt':''}" style="padding:10px;min-height:42px" onclick="buy('${it.id}')">${it.heal?'使用 / 購入':equipped?'装備中':owned?'装備':'購入'}</button></div></div>`}).join('')}<div class="panel"><div class="small muted">🧪 回復薬の所持数: ${S.potions}個</div><button class="btn alt wide" onclick="usePotion()" style="margin-top:8px">回復薬を使う</button></div>`)}
+function buy(id){let it=ITEMS.find(x=>x.id===id);if(!it)return;if(it.heal){if(S.gold<it.cost){pop('ゴールド不足');return}S.gold-=it.cost;S.potions++;pop('回復薬を入手！')}else{if(!S.owned.includes(id)){if(S.gold<it.cost){pop('ゴールド不足');return}S.gold-=it.cost;S.owned.push(id);pop('✨ 新しい装備を獲得！')}if(it.atk)S.weapon=id;else S.armor=id}save();render()}
+function usePotion(){if(S.potions<1){pop('回復薬がない');return}if(S.hp>=maxHp()){pop('HPは満タン');return}S.potions--;S.hp=Math.min(maxHp(),S.hp+35);save();pop('❤️ HP +35');render()}
+function examHome(){frame(`<h2 class="screen-title">📝 CLF-C02 模擬試験</h2><div class="panel"><h2>最後の試練 · 65問</h2><p class="small muted" style="line-height:1.8">65問 / 制限90分。単一選択と複数選択が混在します。解説は終了後にまとめて表示します。<br>問題の配分は公式ガイドの出題分野比率に近づけています。</p><div class="notice">公式試験の合格ラインは換算スコア700/1000。ゲームの正答率は公式換算スコアを再現しません。</div><button class="btn wide" onclick="startExam()">模擬試験を開始する</button></div><div class="panel"><h2>出題範囲</h2>${['クラウドのコンセプト 24%','セキュリティとコンプライアンス 30%','クラウドテクノロジーとサービス 34%','請求、料金、サポート 12%'].map(x=>`<div class="item small">${x}</div>`).join('')}</div>`)}
+function startExam(){let counts=[14,17,22,12],qs=[];for(let d=0;d<4;d++){let a=QUESTIONS.filter(q=>q.d===d).sort(()=>Math.random()-.5);for(let i=0;i<counts[d];i++)qs.push(shuffledQ(a[i%a.length]))}for(let i=qs.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[qs[i],qs[j]]=[qs[j],qs[i]]}exam={qs,index:0,answers:{},ends:Date.now()+90*60000,submitted:false};view='examplay';mockTimer=setInterval(()=>{if(view==='examplay'){if(Date.now()>=exam.ends)finishExam();else{let el=$('#clock');if(el)el.textContent=clock()}}},1000);render()}
+function clock(){let t=Math.max(0,Math.ceil((exam.ends-Date.now())/1000));return String(Math.floor(t/60)).padStart(2,'0')+':'+String(t%60).padStart(2,'0')}
+function examUI(){if(!exam)return go('exam');let i=exam.index,q=exam.qs[i],ans=exam.answers[i]||[];frame(`<div class="rowline"><span class="pill">問 ${i+1}/65</span><span class="gold" id="clock">⏳ ${clock()}</span><button class="btn alt" style="padding:8px;min-height:35px" onclick="if(confirm('採点しますか？'))finishExam()">採点</button></div><div class="meter"><i style="width:${(i+1)/65*100}%"></i></div><div class="panel"><span class="pill">${q.correct.length===2?'2つ選択':'1つ選択'} · ${q.tag}</span><h2 style="font-size:18px;line-height:1.6;margin:18px 0">${esc(q.q)}</h2>${q.order.map((o,n)=>`<button class="choice ${ans.includes(n)?'selected':''}" onclick="examPick(${n})">${ans.includes(n)?'☑':'□'} ${'ABCD'[n]}　${esc(o.t)}</button>`).join('')}</div><div class="btnrow"><button class="btn alt" onclick="examMove(-1)" ${i===0?'disabled':''}>← 前へ</button><button class="btn" onclick="${i===64?'finishExam()':'examMove(1)'}">${i===64?'採点する':'次へ →'}</button></div><p class="tiny muted" style="text-align:center;margin-top:12px">未回答 ${65-Object.keys(exam.answers).filter(i=>exam.answers[i]?.length===exam.qs[i].correct.length).length}問</p>`)}
+function examPick(n){let q=exam.qs[exam.index],a=[...(exam.answers[exam.index]||[])];if(q.correct.length===1)a=[n];else if(a.includes(n))a=a.filter(x=>x!==n);else if(a.length<q.correct.length)a.push(n);exam.answers[exam.index]=a;examUI()}
+function examMove(n){exam.index=Math.max(0,Math.min(64,exam.index+n));examUI()}
+function finishExam(){if(!exam||exam.submitted)return;exam.submitted=true;clearInterval(mockTimer);exam.results=exam.qs.map((q,i)=>{let a=exam.answers[i]||[];return a.length===q.correctPositions.length&&a.every(v=>q.correctPositions.includes(v))});exam.results.forEach((ok,i)=>track(exam.qs[i],ok));view='examresult';render()}
+function examResult(){let correct=exam.results.filter(Boolean).length;let rate=Math.round(correct/65*100);frame(`<div class="panel" style="text-align:center"><div class="reward">${rate>=70?'🏆':'📜'}</div><h2>模擬試験の結果</h2><h1 style="font-size:47px;color:var(--gold);margin:15px">${correct} / 65</h1><p>正答率 ${rate}%</p><div class="notice">正答率で評価しています。公式の700点スケールへの換算ではありません。</div><button class="btn wide" onclick="exam=null;go('exam')">模試メニューに戻る</button></div><div class="panel"><h2>分野別分析</h2>${REGIONS.map((r,d)=>{let arr=exam.qs.map((q,i)=>({q,ok:exam.results[i]})).filter(x=>x.q.d===d);return `<div class="rowline small"><span>${r.icon} ${r.name}</span><b>${arr.filter(x=>x.ok).length}/${arr.length}</b></div>`}).join('')}</div><div class="panel"><h2>全問の解説</h2>${exam.qs.map((q,i)=>`<details class="item"><summary class="small" style="color:${exam.results[i]?'#6be0c1':'#ff9aa9'}">${exam.results[i]?'✅':'❌'} 問${i+1}: ${esc(q.q)}</summary><p class="small" style="margin-top:10px;line-height:1.7">正解：${q.correctPositions.map(n=>esc(q.order[n].t)).join(' / ')}<br>${esc(q.ex)}<br>その他の選択肢は、必要な機能や条件が異なります。</p></details>`).join('')}</div>`)}
+window.addEventListener('pagehide',()=>{if(view==='battle'&&battle)S.studySeconds+=Math.max(0,Math.round((Date.now()-battle.start)/1000));save()});daily();render();
+</script></body></html>
